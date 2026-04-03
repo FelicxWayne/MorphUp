@@ -4,7 +4,7 @@ import com.morphup.model.Exercise;
 import lombok.Data;
 import java.util.Set;
 
-@Data // Safe to use here! Generates getters, setters, toString, and equals.
+@Data 
 public class UserRegistrationDto {
     private String username;
     private String email;
