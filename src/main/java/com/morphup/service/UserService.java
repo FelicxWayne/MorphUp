@@ -1,6 +1,7 @@
 package com.morphup.service;
 
 import com.morphup.dto.UserRegistrationDto;
+import com.morphup.dto.UserResponseDto;
 import com.morphup.model.User;
 import com.morphup.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User registerUser(UserRegistrationDto dto){
+    public UserResponseDto registerUser(UserRegistrationDto dto){
         if(userRepository.findByEmail(dto.getEmail()).isPresent()){
             throw new IllegalArgumentException("This Email is Already in Use");
         }
@@ -22,15 +23,22 @@ public class UserService {
         User newUser = new User();
         newUser.setEmail(dto.getEmail());
         newUser.setUsername(dto.getUsername());
-
-        //leaving a reminder for myself for encrypting the pass using BCrypt
-
         newUser.setPassword(dto.getPassword());
-
         newUser.setEquipmentPreferences(dto.getEquipmentPreferences());
         newUser.setHeightCm(dto.getHeightCm());
         newUser.setWeightKg(dto.getWeightKg());
 
-        return userRepository.save(newUser);
+        User savedUser = userRepository.save(newUser);
+
+        UserResponseDto responseDto = new UserResponseDto();
+        responseDto.setId(savedUser.getId());
+        responseDto.setUsername(savedUser.getUsername());
+        responseDto.setEmail(savedUser.getEmail());
+        responseDto.setEquipmentPreferences(savedUser.getEquipmentPreferences());
+        responseDto.setHeightCm(savedUser.getHeightCm());
+        responseDto.setWeightKg(savedUser.getWeightKg());
+        responseDto.setBmi(savedUser.getBmi());
+
+        return responseDto;
     }
 }

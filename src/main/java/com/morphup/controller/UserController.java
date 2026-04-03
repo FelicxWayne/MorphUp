@@ -1,6 +1,7 @@
 package com.morphup.controller;
 
 import com.morphup.dto.UserRegistrationDto;
+import com.morphup.dto.UserResponseDto;
 import com.morphup.model.User;
 import com.morphup.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +17,10 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody UserRegistrationDto requestDto) {
+    public ResponseEntity<UserResponseDto> register(@RequestBody UserRegistrationDto requestDto) {
 
-        User savedUser = userService.registerUser(requestDto);
+        UserResponseDto response = userService.registerUser(requestDto);
 
-        return ResponseEntity.ok(savedUser);
+        return ResponseEntity.ok(response);
     }
 }
