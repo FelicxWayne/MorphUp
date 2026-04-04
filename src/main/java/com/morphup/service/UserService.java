@@ -5,12 +5,15 @@ import com.morphup.dto.UserResponseDto;
 import com.morphup.model.User;
 import com.morphup.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     public UserResponseDto registerUser(UserRegistrationDto dto){
         if(userRepository.findByEmail(dto.getEmail()).isPresent()){
@@ -23,7 +26,7 @@ public class UserService {
         User newUser = new User();
         newUser.setEmail(dto.getEmail());
         newUser.setUsername(dto.getUsername());
-        newUser.setPassword(dto.getPassword());
+        newUser.setPassword(passwordEncoder.encode(dto.getPassword()));
         newUser.setEquipmentPreferences(dto.getEquipmentPreferences());
         newUser.setHeightCm(dto.getHeightCm());
         newUser.setWeightKg(dto.getWeightKg());
