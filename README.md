@@ -1,16 +1,24 @@
-# 🚧 MorphUp (Work in Progress)
+# ⏸️ MorphUp (On Hold)
 
-MorphUp is a Spring Boot backend designed to deliver personalized workout recommendations based on user goals, available equipment, and fitness preferences.
+MorphUp is a Spring Boot backend designed to deliver personalized workout recommendations based on a user's physical profile, available equipment, and training environment — with planned support for approximate sets/reps calculated from BMI.
+
+Development is currently paused while I focus on interview prep, but I plan to pick this back up.
 
 ## Current Progress
 
-- ✅ Project initialization
-- ✅ Backend architecture planning
-- 🚧 Authentication
-- 🚧 Workout recommendation engine
-- 🚧 PostgreSQL integration
-- 🚧 REST APIs
+- ✅ Project initialization & backend architecture planning
+- ✅ PostgreSQL integration via Spring Data JPA (normalized schema: Users, Exercises, MuscleGroups, WorkoutSessions, SessionExercises)
+- ✅ User registration — BCrypt password hashing, duplicate email/username validation, BMI auto-calculation from height/weight
+- ✅ Core workout recommendation endpoint — filters exercises by target muscle group and user's available equipment
+- 🚧 JWT authentication — dependencies and route rules in place, login/token flow not yet functional
+- 🚧 Sets & reps calculation engine (BMI-based approximation)
+- 🚧 Full REST API coverage
+- 🚧 Frontend
 - 🚧 Docker support
 - 🚧 Documentation
 
-This repository is currently under active development as a backend engineering project.
+## Planned
+
+- Recommendations that adapt to workout environment (home/gym/limited equipment), not just muscle group + equipment
+- BMI-driven approximate sets/reps suggestions per exercise
+- Full-stack build out with a frontend client
